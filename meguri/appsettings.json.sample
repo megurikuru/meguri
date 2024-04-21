@@ -1,0 +1,26 @@
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost;Port=5432;Database=DB_NAME;Username=USER_NAME;Password=PASSWORD"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "Kestrel": {
+    "Endpoints": {
+      "MyHttpEndpoint": {
+        "Url": "http://127.0.0.1:5000"
+      }
+    }
+  },
+  "SMTPServerConf": {
+    "HostName": "mail.example.com",
+    "Port": 465,
+    "LocalDomain": "example.com",
+    "Accout": "meguri@example.com",
+    "Password": "PASSWORD"
+  }
+}
