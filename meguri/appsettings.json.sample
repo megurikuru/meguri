@@ -12,7 +12,8 @@
   "Kestrel": {
     "Endpoints": {
       "MyHttpEndpoint": {
-        "Url": "http://127.0.0.1:5000"
+        // "Url": "http://127.0.0.1:5000"
+        "Url": "http://meguri.info:5000"
       }
     }
   },
