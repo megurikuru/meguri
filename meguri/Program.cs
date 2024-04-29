@@ -31,7 +31,11 @@ public class Program {
         builder.Services.AddDefaultIdentity<IdentityUser>(
             options => options.SignIn.RequireConfirmedAccount = true
         ).AddEntityFrameworkStores<ApplicationDbContext>();
-        builder.Services.AddRazorPages();
+
+        //builder.Services.AddIdentity<IdentityUser, IdentityRole>(
+        //    options => options.SignIn.RequireConfirmedAccount = false)
+        //    .AddEntityFrameworkStores<ApplicationDbContext>()
+        //    .AddDefaultTokenProviders();
 
         builder.Services.Configure<IdentityOptions>(options => {
             // パスワード強度
@@ -47,6 +51,9 @@ public class Program {
             options.Lockout.AllowedForNewUsers = true;
         });
 
+        //builder.Services.AddAuthorizationBuilder()
+        //    .AddPolicy("TwoFactorEnabled", x => x.RequireClaim("amr", "mfa"));
+
         // メール
         var smtpServerConf = builder.Configuration.GetSection("SMTPServerConf");
         builder.Services.AddTransient<IEmailSender, EmailSender>();
@@ -59,6 +66,8 @@ public class Program {
         });
 
         builder.Services.AddControllersWithViews();
+
+        builder.Services.AddRazorPages();
 
         var app = builder.Build();
 
