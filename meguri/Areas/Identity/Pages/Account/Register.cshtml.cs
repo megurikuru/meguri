@@ -123,6 +123,9 @@ namespace meguri.Areas.Identity.Pages.Account {
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
+                    // なぜか、httpssになる。"s"が一個多い!?
+                    callbackUrl = callbackUrl.Replace("httpss", "https");
+
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
