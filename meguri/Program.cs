@@ -71,6 +71,9 @@ public class Program {
 
         var app = builder.Build();
 
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+
         // ミドルウェアを構成して、X-Forwarded-For および X-Forwarded-Proto ヘッダーを転送する。
         app.UseForwardedHeaders(new ForwardedHeadersOptions {
             ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto

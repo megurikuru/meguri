@@ -1,4 +1,4 @@
-﻿@model meguri.Models.Work
+@model meguri.Models.Work
 
 @{
     ViewData["Title"] = "Create";
@@ -10,17 +10,8 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ParentId" class="control-label"></label>
-                <input asp-for="ParentId" class="form-control" />
-                <span asp-validation-for="ParentId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="WorkTypeId" class="control-label"></label>
-                <select asp-for="WorkTypeId" class ="form-control" asp-items="ViewBag.WorkTypeId"></select>
-            </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -30,6 +21,40 @@
                 <label asp-for="Text" class="control-label"></label>
                 <input asp-for="Text" class="form-control" />
                 <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParentId" class="control-label"></label>
+                <input asp-for="ParentId" class="form-control" value="0" />
+                <span asp-validation-for="ParentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WorkType" class="control-label"></label>
+                <input asp-for="WorkType" class="form-control" value="Illustration" />
+                <span asp-validation-for="WorkType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Category" class="control-label"></label>
+                <input asp-for="Category" class="form-control" value="" />
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tag1" class="control-label"></label>
+                <input asp-for="Tag1" class="form-control" />
+                <span asp-validation-for="Tag1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tag2" class="control-label"></label>
+                <input asp-for="Tag2" class="form-control" />
+                <span asp-validation-for="Tag2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tag3" class="control-label"></label>
+                <input asp-for="Tag3" class="form-control" />
+                <span asp-validation-for="Tag3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FileContent" class="control-label"></label>
+                <input asp-for="FileContent" class="form-control" type="file"/>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
@@ -41,6 +66,7 @@
                     <input class="form-check-input" asp-for="Violence" /> @Html.DisplayNameFor(model => model.Violence)
                 </label>
             </div>
+            @*
             <div class="form-group">
                 <label asp-for="Created" class="control-label"></label>
                 <input asp-for="Created" class="form-control" />
@@ -51,6 +77,7 @@
                 <input asp-for="Updated" class="form-control" />
                 <span asp-validation-for="Updated" class="text-danger"></span>
             </div>
+            *@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

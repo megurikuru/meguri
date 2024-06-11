@@ -6,10 +6,10 @@ namespace meguri.Models {
     [Index(nameof(Birthday))]
     public class User: IdentityUser{
         public DateOnly Birthday { get; set; }
-        public bool Sexual  { get; set; } = false;
-        public bool Violence  { get; set; } = false;
+        public bool AllowSexual  { get; set; } = false;
+        public bool AllowViolence  { get; set; } = false;
 
-        public ICollection<Work>? Works { get; set; }
+        public virtual ICollection<Work>? Works { get; set; }
     }
 
 }

@@ -33,8 +33,8 @@ namespace meguri.Migrations
                     Id = table.Column<string>(type: "text", nullable: false),
                     Discriminator = table.Column<string>(type: "character varying(13)", maxLength: 13, nullable: false),
                     Birthday = table.Column<DateOnly>(type: "date", nullable: true),
-                    Sexual = table.Column<bool>(type: "boolean", nullable: true),
-                    Violence = table.Column<bool>(type: "boolean", nullable: true),
+                    AllowSexual = table.Column<bool>(type: "boolean", nullable: true),
+                    AllowViolence = table.Column<bool>(type: "boolean", nullable: true),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -53,47 +53,6 @@ namespace meguri.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Category",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ParentId = table.Column<int>(type: "integer", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Category", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Tag",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Discripution = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tag", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "WorkType",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WorkType", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -208,116 +167,29 @@ namespace meguri.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ParentId = table.Column<int>(type: "integer", nullable: false),
-                    WorkTypeId = table.Column<int>(type: "integer", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: true),
                     Text = table.Column<string>(type: "text", nullable: true),
+                    ParentId = table.Column<int>(type: "integer", nullable: false),
+                    WorkType = table.Column<string>(type: "text", nullable: true),
+                    Category = table.Column<string>(type: "text", nullable: true),
+                    Tag1 = table.Column<string>(type: "text", nullable: true),
+                    Tag2 = table.Column<string>(type: "text", nullable: true),
+                    Tag3 = table.Column<string>(type: "text", nullable: true),
+                    FileContent = table.Column<byte[]>(type: "bytea", nullable: true),
                     Sexual = table.Column<bool>(type: "boolean", nullable: false),
                     Violence = table.Column<bool>(type: "boolean", nullable: false),
                     Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    Updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UserId = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Work", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Work_WorkType_WorkTypeId",
-                        column: x => x.WorkTypeId,
-                        principalTable: "WorkType",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CategoryWork",
-                columns: table => new
-                {
-                    CategoriesId = table.Column<int>(type: "integer", nullable: false),
-                    WorksId = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CategoryWork", x => new { x.CategoriesId, x.WorksId });
-                    table.ForeignKey(
-                        name: "FK_CategoryWork_Category_CategoriesId",
-                        column: x => x.CategoriesId,
-                        principalTable: "Category",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CategoryWork_Work_WorksId",
-                        column: x => x.WorksId,
-                        principalTable: "Work",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "FilePath",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    WorkId = table.Column<int>(type: "integer", nullable: false),
-                    Path = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FilePath", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_FilePath_Work_WorkId",
-                        column: x => x.WorkId,
-                        principalTable: "Work",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TagWork",
-                columns: table => new
-                {
-                    TagsId = table.Column<int>(type: "integer", nullable: false),
-                    WorksId = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TagWork", x => new { x.TagsId, x.WorksId });
-                    table.ForeignKey(
-                        name: "FK_TagWork_Tag_TagsId",
-                        column: x => x.TagsId,
-                        principalTable: "Tag",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_TagWork_Work_WorksId",
-                        column: x => x.WorksId,
-                        principalTable: "Work",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserWork",
-                columns: table => new
-                {
-                    UsersId = table.Column<string>(type: "text", nullable: false),
-                    WorksId = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserWork", x => new { x.UsersId, x.WorksId });
-                    table.ForeignKey(
-                        name: "FK_UserWork_AspNetUsers_UsersId",
-                        column: x => x.UsersId,
+                        name: "FK_Work_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserWork_Work_WorksId",
-                        column: x => x.WorksId,
-                        principalTable: "Work",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -363,39 +235,24 @@ namespace meguri.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Category_ParentId",
-                table: "Category",
-                column: "ParentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CategoryWork_WorksId",
-                table: "CategoryWork",
-                column: "WorksId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FilePath_WorkId",
-                table: "FilePath",
-                column: "WorkId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TagWork_WorksId",
-                table: "TagWork",
-                column: "WorksId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserWork_WorksId",
-                table: "UserWork",
-                column: "WorksId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Work_Created",
-                table: "Work",
-                column: "Created");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Work_ParentId",
                 table: "Work",
                 column: "ParentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Work_Tag1",
+                table: "Work",
+                column: "Tag1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Work_Tag2",
+                table: "Work",
+                column: "Tag2");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Work_Tag3",
+                table: "Work",
+                column: "Tag3");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Work_Updated",
@@ -403,9 +260,9 @@ namespace meguri.Migrations
                 column: "Updated");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Work_WorkTypeId",
+                name: "IX_Work_UserId",
                 table: "Work",
-                column: "WorkTypeId");
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -427,34 +284,13 @@ namespace meguri.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "CategoryWork");
-
-            migrationBuilder.DropTable(
-                name: "FilePath");
-
-            migrationBuilder.DropTable(
-                name: "TagWork");
-
-            migrationBuilder.DropTable(
-                name: "UserWork");
+                name: "Work");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Category");
-
-            migrationBuilder.DropTable(
-                name: "Tag");
-
-            migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Work");
-
-            migrationBuilder.DropTable(
-                name: "WorkType");
         }
     }
 }

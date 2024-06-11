@@ -1,0 +1,14 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+
+# IDE0090: 'new(...)' を使用する
+dotnet_diagnostic.IDE0090.severity = silent
+
+# CS8604: Null 参照引数の可能性があります。
+dotnet_diagnostic.CS8604.severity = silent
+
+# IDE0060: 未使用のパラメーターを削除します
+dotnet_diagnostic.IDE0060.severity = none

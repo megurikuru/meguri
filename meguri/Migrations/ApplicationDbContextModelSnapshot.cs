@@ -22,21 +22,6 @@ namespace meguri.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("CategoryWork", b =>
-                {
-                    b.Property<int>("CategoriesId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("WorksId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("CategoriesId", "WorksId");
-
-                    b.HasIndex("WorksId");
-
-                    b.ToTable("CategoryWork");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -246,98 +231,23 @@ namespace meguri.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("TagWork", b =>
-                {
-                    b.Property<int>("TagsId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("WorksId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("TagsId", "WorksId");
-
-                    b.HasIndex("WorksId");
-
-                    b.ToTable("TagWork");
-                });
-
-            modelBuilder.Entity("UserWork", b =>
-                {
-                    b.Property<string>("UsersId")
-                        .HasColumnType("text");
-
-                    b.Property<int>("WorksId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("UsersId", "WorksId");
-
-                    b.HasIndex("WorksId");
-
-                    b.ToTable("UserWork");
-                });
-
-            modelBuilder.Entity("meguri.Models.Category", b =>
+            modelBuilder.Entity("meguri.Models.UploadFile", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<byte[]>("FileContent")
+                        .HasColumnType("bytea");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("ParentId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParentId");
-
-                    b.ToTable("Category");
-                });
-
-            modelBuilder.Entity("meguri.Models.FilePath", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Path")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("WorkId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("WorkId");
-
-                    b.ToTable("FilePath");
-                });
-
-            modelBuilder.Entity("meguri.Models.Tag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Discripution")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tag");
+                    b.ToTable("UploadFile");
                 });
 
             modelBuilder.Entity("meguri.Models.Work", b =>
@@ -348,8 +258,14 @@ namespace meguri.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Category")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<byte[]>("FileContent")
+                        .HasColumnType("bytea");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -360,17 +276,29 @@ namespace meguri.Migrations
                     b.Property<bool>("Sexual")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("Tag1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Tag2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Tag3")
+                        .HasColumnType("text");
+
                     b.Property<string>("Text")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("Updated")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
+
                     b.Property<bool>("Violence")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("WorkTypeId")
-                        .HasColumnType("integer");
+                    b.Property<string>("WorkType")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -378,61 +306,35 @@ namespace meguri.Migrations
 
                     b.HasIndex("ParentId");
 
+                    b.HasIndex("Tag1");
+
+                    b.HasIndex("Tag2");
+
+                    b.HasIndex("Tag3");
+
                     b.HasIndex("Updated");
 
-                    b.HasIndex("WorkTypeId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Work");
-                });
-
-            modelBuilder.Entity("meguri.Models.WorkType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("WorkType");
                 });
 
             modelBuilder.Entity("meguri.Models.User", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
+                    b.Property<bool>("AllowSexual")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("AllowViolence")
+                        .HasColumnType("boolean");
+
                     b.Property<DateOnly>("Birthday")
                         .HasColumnType("date");
-
-                    b.Property<bool>("Sexual")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("Violence")
-                        .HasColumnType("boolean");
 
                     b.HasIndex("Birthday");
 
                     b.HasDiscriminator().HasValue("User");
-                });
-
-            modelBuilder.Entity("CategoryWork", b =>
-                {
-                    b.HasOne("meguri.Models.Category", null)
-                        .WithMany()
-                        .HasForeignKey("CategoriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("meguri.Models.Work", null)
-                        .WithMany()
-                        .HasForeignKey("WorksId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -486,62 +388,16 @@ namespace meguri.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TagWork", b =>
-                {
-                    b.HasOne("meguri.Models.Tag", null)
-                        .WithMany()
-                        .HasForeignKey("TagsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("meguri.Models.Work", null)
-                        .WithMany()
-                        .HasForeignKey("WorksId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("UserWork", b =>
-                {
-                    b.HasOne("meguri.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("meguri.Models.Work", null)
-                        .WithMany()
-                        .HasForeignKey("WorksId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("meguri.Models.FilePath", b =>
-                {
-                    b.HasOne("meguri.Models.Work", "Work")
-                        .WithMany("FielPaths")
-                        .HasForeignKey("WorkId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Work");
-                });
-
             modelBuilder.Entity("meguri.Models.Work", b =>
                 {
-                    b.HasOne("meguri.Models.WorkType", null)
+                    b.HasOne("meguri.Models.User", "User")
                         .WithMany("Works")
-                        .HasForeignKey("WorkTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("meguri.Models.Work", b =>
-                {
-                    b.Navigation("FielPaths");
-                });
-
-            modelBuilder.Entity("meguri.Models.WorkType", b =>
+            modelBuilder.Entity("meguri.Models.User", b =>
                 {
                     b.Navigation("Works");
                 });

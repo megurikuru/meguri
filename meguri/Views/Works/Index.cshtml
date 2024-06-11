@@ -1,4 +1,4 @@
-﻿@model IEnumerable<meguri.Models.Work>
+@model IEnumerable<meguri.Models.Work>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,13 +13,31 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ParentId)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Text)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParentId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tag1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tag2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tag3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FileContent)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Sexual)
@@ -37,16 +55,36 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model) {
+        var image = Convert.ToBase64String(item.FileContent);
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ParentId)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tag1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tag2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tag3)
+            </td>
+            <td>
+                @* @Html.DisplayFor(modelItem => item.FileContent) *@
+                <img src="data:image/png;base64,@image" class="index-work-image">
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Sexual)
@@ -66,6 +104,6 @@
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

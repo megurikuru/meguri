@@ -1,0 +1,9 @@
+img.index-work-image {
+    max-width: 4rem;
+    max-height: 4rem;
+}
+
+img.details-work-image {
+    max-width: 320px;
+    max-height: 320px;
+}

@@ -1,26 +1,27 @@
-﻿@model meguri.Models.FilePath
+@model meguri.Models.UploadFile
 
 @{
     ViewData["Title"] = "Details";
+    var image = Convert.ToBase64String(Model.FileContent);
 }
 
 <h1>Details</h1>
 
 <div>
-    <h4>FilePath</h4>
+    <h4>UploadFile</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Path)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Path)
+            @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Work)
+            @Html.DisplayNameFor(model => model.FileContent)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Work.Id)
+            <img src="data:image/png;base64,@image" class="details-work-image">
         </dd>
     </dl>
 </div>
