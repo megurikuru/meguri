@@ -1,13 +1,16 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using meguri.Models;
+using Meguri.Models;
 
-namespace meguri.Data {
+namespace Meguri.Data {
     public class ApplicationDbContext : IdentityDbContext {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options) {
         }
-        public DbSet<meguri.Models.Work> Work { get; set; } = default!;
-        public DbSet<meguri.Models.UploadFile> UploadFile { get; set; } = default!;
+
+        public DbSet<Meguri.Models.Work> Work { get; set; } = default!;
+        public DbSet<Meguri.Models.User> User{ get; set; } = default!;
+        public DbSet<Meguri.Models.Category> Category{ get; set; } = default!;
+        public DbSet<Meguri.Models.UploadFile> UploadFile { get; set; } = default!;
     }
 }

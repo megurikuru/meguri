@@ -21,7 +21,7 @@
     "HostName": "mail.example.com",
     "Port": 465,
     "LocalDomain": "example.com",
-    "Accout": "meguri@example.com",
+    "Accout": "account@example.com",
     "Password": "PASSWORD"
   }
 }

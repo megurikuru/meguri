@@ -3,12 +3,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.HttpOverrides;
-using meguri.Data;
-using meguri.Services;
+using Meguri.Data;
+using Meguri.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authorization;
+using Meguri.Authorization;
 
-namespace meguri;
+namespace Meguri;
 
 public class Program {
     public static void Main(string[] args) {
@@ -28,14 +30,11 @@ public class Program {
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
         // ID管理
+        // ロールサービスを追加する。
         builder.Services.AddDefaultIdentity<IdentityUser>(
             options => options.SignIn.RequireConfirmedAccount = true
-        ).AddEntityFrameworkStores<ApplicationDbContext>();
-
-        //builder.Services.AddIdentity<IdentityUser, IdentityRole>(
-        //    options => options.SignIn.RequireConfirmedAccount = false)
-        //    .AddEntityFrameworkStores<ApplicationDbContext>()
-        //    .AddDefaultTokenProviders();
+        ).AddRoles<IdentityRole>()
+        .AddEntityFrameworkStores<ApplicationDbContext>();
 
         builder.Services.Configure<IdentityOptions>(options => {
             // パスワード強度
@@ -51,9 +50,6 @@ public class Program {
             options.Lockout.AllowedForNewUsers = true;
         });
 
-        //builder.Services.AddAuthorizationBuilder()
-        //    .AddPolicy("TwoFactorEnabled", x => x.RequireClaim("amr", "mfa"));
-
         // メール
         var smtpServerConf = builder.Configuration.GetSection("SMTPServerConf");
         builder.Services.AddTransient<IEmailSender, EmailSender>();
@@ -68,6 +64,17 @@ public class Program {
         builder.Services.AddControllersWithViews();
 
         builder.Services.AddRazorPages();
+
+        // 認証されたユーザーを要求する。
+        builder.Services.AddAuthorizationBuilder()
+        .SetFallbackPolicy(new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build());
+
+        // 認可ハンドラー
+        builder.Services.AddScoped<
+            IAuthorizationHandler, WorkIsOwnerAuthorizationHandler
+        >();
 
         var app = builder.Build();
 

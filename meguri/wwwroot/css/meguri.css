@@ -4,6 +4,11 @@ img.index-work-image {
 }
 
 img.details-work-image {
+    margin-top: 0.2rem;
     max-width: 320px;
     max-height: 320px;
+}
+
+#FileContent {
+    margin-top: 0.5rem;
 }

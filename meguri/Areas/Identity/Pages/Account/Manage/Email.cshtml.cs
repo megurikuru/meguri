@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 
-namespace meguri.Areas.Identity.Pages.Account.Manage
+namespace Meguri.Areas.Identity.Pages.Account.Manage
 {
     public class EmailModel : PageModel
     {

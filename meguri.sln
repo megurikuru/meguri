@@ -1,9 +1,8 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "meguri", "meguri\meguri.csproj", "{EC5CADDC-99FC-47D6-9179-E7F9152581BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Meguri", "meguri\Meguri.csproj", "{EC5CADDC-99FC-47D6-9179-E7F9152581BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

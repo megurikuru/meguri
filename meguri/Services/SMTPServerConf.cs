@@ -1,4 +1,4 @@
-namespace meguri.Services;
+namespace Meguri.Services;
 
 public class SMTPServerConf {
     public string? HostName { get; set; }

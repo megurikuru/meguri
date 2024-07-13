@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using meguri.Data;
+using Meguri.Data;
 
 #nullable disable
 
-namespace meguri.Migrations
+namespace Meguri.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20240525070818_AddIndexToCreatedColumn")]

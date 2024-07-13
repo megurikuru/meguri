@@ -1,4 +1,4 @@
-@model IEnumerable<meguri.Models.Work>
+@model IEnumerable<Meguri.Models.Work>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,6 +13,12 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
@@ -25,7 +31,10 @@
                 @Html.DisplayNameFor(model => model.WorkType)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Category)
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category.Name)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Tag1)
@@ -56,8 +65,13 @@
     </thead>
     <tbody>
     @foreach (var item in Model) {
-        var image = Convert.ToBase64String(item.FileContent);
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -71,7 +85,10 @@
                 @Html.DisplayFor(modelItem => item.WorkType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Category)
+                @Html.DisplayFor(modelItem => item.CategoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Tag1)
@@ -83,8 +100,12 @@
                 @Html.DisplayFor(modelItem => item.Tag3)
             </td>
             <td>
-                @* @Html.DisplayFor(modelItem => item.FileContent) *@
-                <img src="data:image/png;base64,@image" class="index-work-image">
+                @{
+                    if (item.FileContent != null) {
+                        var image = Convert.ToBase64String(item.FileContent);
+                        <img src="data:image/png;base64,@image" class="index-work-image">
+                    }
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Sexual)

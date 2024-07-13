@@ -1,8 +1,11 @@
-using meguri.Models;
+using Meguri.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace meguri.Controllers {
+
+namespace Meguri.Controllers {
+    [AllowAnonymous]
     public class HomeController : Controller {
         private readonly ILogger<HomeController> _logger;
 

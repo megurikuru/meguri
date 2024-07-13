@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using meguri.Data;
-using meguri.Models;
+using Meguri.Data;
+using Meguri.Models;
 using MimeKit;
 using Microsoft.AspNetCore.Http;
 
-namespace meguri.Controllers {
+namespace Meguri.Controllers {
     public class UploadFilesController : Controller {
         private readonly ApplicationDbContext _context;
 

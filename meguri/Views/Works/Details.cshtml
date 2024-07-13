@@ -1,8 +1,7 @@
-@model meguri.Models.Work
+@model Meguri.Models.Work
 
 @{
     ViewData["Title"] = "Details";
-    var image = Convert.ToBase64String(Model.FileContent);
 }
 
 <h1>Details</h1>
@@ -36,7 +35,7 @@
             @Html.DisplayFor(model => model.WorkType)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Category)
+            @Html.DisplayNameFor(model => model.CategoryId)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Category)
@@ -63,8 +62,12 @@
             @Html.DisplayNameFor(model => model.FileContent)
         </dt>
         <dd class = "col-sm-10">
-            @* @Html.DisplayFor(model => model.FileContent) *@
-            <img src="data:image/png;base64,@image" class="details-work-image">
+            @{
+                if (Model.FileContent != null) {
+                    var image = Convert.ToBase64String(Model.FileContent);
+                    <img src="data:image/png;base64,@image" class="details-work-image">
+                }
+            }
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Sexual)

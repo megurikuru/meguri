@@ -1,4 +1,4 @@
-namespace meguri.Models {
+namespace Meguri.Models {
     public class ErrorViewModel {
         public string? RequestId { get; set; }
 

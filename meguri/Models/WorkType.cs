@@ -1,7 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace meguri.Models {
+namespace Meguri.Models {
 
+    [Table("WorkTypes")]
     public class WorkType {
         [Key]
         public int Id { get; set; }

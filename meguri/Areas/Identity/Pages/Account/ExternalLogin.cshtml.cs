@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
-namespace meguri.Areas.Identity.Pages.Account {
+namespace Meguri.Areas.Identity.Pages.Account {
     [AllowAnonymous]
     public class ExternalLoginModel : PageModel {
         private readonly SignInManager<IdentityUser> _signInManager;

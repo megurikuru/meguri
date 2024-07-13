@@ -12,7 +12,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
-namespace meguri.Areas.Identity.Pages.Account {
+namespace Meguri.Areas.Identity.Pages.Account {
+    [AllowAnonymous]
     public class LoginWith2faModel : PageModel {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;

@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace meguri.Migrations
+namespace Meguri.Migrations
 {
     /// <inheritdoc />
     public partial class AddIndexToCreatedColumn : Migration
