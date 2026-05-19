@@ -30,6 +30,8 @@ namespace Meguri.Models {
         public DateTime Created { get; set; }
         public DateTime Updated { get; set;}
 
+        // ナビゲーションプロパティ
+        // 1対1のリレーション
         public Category? Category { get; set; }
     }
 
