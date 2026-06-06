@@ -1,7 +1,7 @@
-## --- git �֘A ---
+## --- git 関連 ---
 .git
 .github
-## --- Visual Studio �֘A ---
+## --- Visual Studio 関連 ---
 .vs
 bin
 obj
