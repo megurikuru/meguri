@@ -9,7 +9,7 @@
 <h3>@ViewData["Title"]</h3>
 <div>
     <p>To use an authenticator app go through the following steps:</p>
-    <ol class="list">
+    <ol>
         <li>
             <p>
                 Download a two-factor authenticator app like Microsoft Authenticator for
@@ -34,16 +34,16 @@
                 Once you have scanned the QR code or input the key above, your two factor authentication app will provide you
                 with a unique code. Enter the code in the confirmation box below.
             </p>
-            <div class="row">
-                <div class="col-md-6">
+            <div>
+                <div>
                     <form id="send-code" method="post">
-                        <div class="form-floating mb-3">
-                            <input asp-for="Input.Code" class="form-control" autocomplete="off" placeholder="Please enter the code."/>
-                            <label asp-for="Input.Code" class="control-label form-label">Verification Code</label>
-                            <span asp-validation-for="Input.Code" class="text-danger"></span>
+                        <div>
+                            <input asp-for="Input.Code" autocomplete="off" placeholder="Please enter the code."/>
+                            <label asp-for="Input.Code">Verification Code</label>
+                            <span asp-validation-for="Input.Code"></span>
                         </div>
-                        <button type="submit" class="w-100 btn btn-lg btn-primary">Verify</button>
-                        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                        <button type="submit">Verify</button>
+                        <div asp-validation-summary="ModelOnly" role="alert"></div>
                     </form>
                 </div>
             </div>

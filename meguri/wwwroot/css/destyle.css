@@ -1,0 +1,34 @@
+/* ===================== リセット (User Agent Stylesheet 対策) ===================== */
+
+/* 1. 全要素のボックスサイズ計算を統一（paddingやborderをwidthに含める） */
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+/* 2. デフォルトのマージンとパディングを削除 */
+body, h1, h2, h3, h4, p, figure, blockquote, dl, dd, ul, ol {
+	margin: 0;
+	padding: 0;
+}
+
+/* 3. デフォルトのリストスタイル（・や数字）を削除 */
+ul, ol {
+	list-style: none;
+}
+
+/* 4. 画像の振る舞いを扱いやすくする（はみ出し防止と余白の削除） */
+img, picture {
+	max-width: 100%;
+	display: block;
+}
+
+/* 5. フォーム要素のフォント指定をリセット（UAスタイルが勝手に別のフォントを当てるのを防ぐ） */
+input, button, textarea, select {
+	font: inherit;
+}
+
+/* 6. 見出しの文字サイズと太さをリセット（UAスタイルの極端なサイズを打ち消す） */
+h1, h2, h3, h4, h5, h6 {
+	font-size: inherit;
+	font-weight: inherit;
+}

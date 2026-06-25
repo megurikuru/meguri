@@ -8,22 +8,22 @@
 
 <h4>UploadFile</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div>
+    <div>
         <form asp-action="Create" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+            <div asp-validation-summary="ModelOnly"></div>
+            <div>
+                <label asp-for="Name"></label>
+                <input asp-for="Name" />
+                <span asp-validation-for="Name"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="FileContent" class="control-label"></label>
-                <input asp-for="FileContent" class="form-control" type="file" />
-                <span asp-validation-for="FileContent" class="text-danger"></span>
+            <div>
+                <label asp-for="FileContent"></label>
+                <input asp-for="FileContent" type="file" />
+                <span asp-validation-for="FileContent"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div>
+                <input type="submit" value="Create" />
             </div>
         </form>
     </div>

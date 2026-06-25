@@ -1,14 +1,292 @@
-img.index-work-image {
-    max-width: 4rem;
-    max-height: 4rem;
+/* ===================== リセット & 変数 ===================== */
+*, *::before, *::after {
+	box-sizing: border-box;
 }
 
-img.details-work-image {
-    margin-top: 0.2rem;
-    max-width: 320px;
-    max-height: 320px;
+body, h1, h2, h3, h4, p, figure, blockquote, dl, dd, ul, ol, form {
+	margin: 0;
+	padding: 0;
 }
 
-#FileContent {
-    margin-top: 0.5rem;
+ul, ol {
+	list-style: none;
+}
+
+img, picture {
+	max-width: 100%;
+	display: block;
+}
+
+:root {
+	--color-background: #f5f4f8;
+	--color-surface: #ffffff;
+	--color-text-primary: #232029;
+	--color-text-secondary: #5d5868;
+	--color-primary: #A69ABD;
+	--color-primary-hover: #8E81A8;
+	--color-on-primary: #ffffff;
+	--color-error: #d33855;
+	--color-error-bg: #fff5f6;
+	--spacing-base: 0.5rem;
+	--radius-base: 0.25rem;
+	--color-link: #8E81A8;
+	--color-link-hover: #73668D;
+	--color-input-bg: var(--color-background);
+	--color-input-bg-disabled: #e6e4ec;
+	--color-input-border: #d3cfe0;
+	--color-input-border-focus: #A69ABD;
+	--color-input-placeholder: #a09ba9;
+}
+
+/* ===================== 共通スタイル ===================== */
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100dvh;
+	background-color: var(--color-background);
+	color: var(--color-text-primary);
+	width: 412px; /* 開発中だけ指定 */
+	margin: 0 auto; /* 開発中だけ指定 */
+}
+
+main {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	margin: 0 var(--spacing-base);
+	justify-content: center; /* 子要素（form）を上下中央に配置 */
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	gap: calc(var(--spacing-base) * 2);
+}
+
+a {
+	color: var(--color-link);
+	text-decoration: none;
+	transition: color 0.2s;
+
+	@media (hover: hover) {
+		&:hover {
+			color: var(--color-primary-hover);
+		}
+	}
+}
+
+/* ----------- 見出しのスタイル ----------- */
+h1 {
+	color: var(--color-link-hover);
+	font-size: 1.5rem;
+	margin-bottom: calc(var(--spacing-base) * 2);
+	text-align: center; /* 修正：左右中央寄せ */
+}
+
+h2 {
+	color: var(--color-text-primary);
+	font-size: 1.2rem;
+	margin-bottom: var(--spacing-base);
+}
+
+h3 {
+	color: var(--color-text-secondary);
+	font-size: 1rem;
+	margin-bottom: var(--spacing-base);
+}
+
+/* ----------- 区切り線 (hr) ----------- */
+hr {
+	border: none;
+	border-top: 1px solid var(--color-input-border);
+	margin: calc(var(--spacing-base) * 4) 0;
+}
+
+/* ----------- ヘッダー / ナビ / フッター ---------- */
+header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: var(--spacing-base) 0;
+}
+
+header > a {
+	display: block;
+	color: var(--color-text-secondary);
+	text-decoration: none;
+}
+
+.tagline {
+	font-weight: normal;
+	font-size: 0.8rem;
+	font-style: italic;
+	margin-top: calc(var(--spacing-base) * 0.8);
+	color: var(--color-text-secondary);
+}
+
+nav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1px;
+}
+
+nav > a {
+	display: inline-flex;
+	flex-grow: 1;
+	white-space: nowrap;
+	justify-content: center;
+	align-items: center;
+	padding: var(--spacing-base);
+	background-color: var(--color-primary);
+	color: var(--color-on-primary);
+	text-decoration: none;
+	cursor: pointer;
+	transition: background-color 0.2s, color 0.2s;
+
+	@media (hover: hover) {
+		&:hover {
+			background-color: var(--color-primary-hover);
+		}
+	}
+}
+
+footer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: var(--spacing-base) 0;
+	font-size: 0.8rem;
+	color: var(--color-text-secondary);
+	margin: auto 0 0.5rem 0; /* 上をautoにして最下部固定、下余白を統合 */
+}
+
+/* ===================== 共通部品 & 各画面 ===================== */
+button, .button-look {
+	display: inline-flex;
+	width: fit-content;
+	justify-content: center;
+	padding: calc(var(--spacing-base) * 1.5) calc(var(--spacing-base) * 3);
+	border-radius: var(--radius-base);
+	border: none;
+	text-decoration: none;
+	background: var(--color-primary);
+	color: var(--color-on-primary);
+	cursor: pointer;
+	transition: background-color 0.2s;
+	margin: 0 auto; /* 修正：Flexboxの縦並びアイテム（button）を左右中央寄せ */
+
+	@media (hover: hover) {
+		&:hover {
+			background-color: var(--color-primary-hover);
+		}
+	}
+}
+
+a.button-look:hover {
+	color: var(--color-background);
+}
+
+dl > div {
+	display: flex;
+	margin-top: var(--spacing-base);
+}
+
+dl > div > dt::after {
+	white-space: pre-wrap;
+	content: ' : ';
+}
+
+dl img {
+	margin-top: calc(var(--spacing-base) * 0.4);
+	max-width: 320px;
+	max-height: 320px;
+	width: 100%;
+	height: auto;
+}
+
+body > div > main > div > img {
+	max-width: 90%;
+	height: auto;
+}
+
+body > header > nav > div {
+	text-align: center;
+}
+
+.home {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.home > div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4rem;
+}
+
+.home a {
+	display: block;
+	text-align: center;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+	box-sizing: border-box;
+	width: 100%;
+	line-height: 1.5;
+	padding: calc(var(--spacing-base) * 1.5) calc(var(--spacing-base) * 2);
+	border: 1px solid var(--color-input-border);
+	border-radius: var(--radius-base);
+	background-color: var(--color-input-bg);
+	color: var(--color-text-primary);
+	outline: none;
+	transition: border-color 0.2s, background-color 0.2s;
+
+	&:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus {
+		-webkit-box-shadow: 0 0 0px 1000px var(--color-input-bg) inset !important;
+		-webkit-text-fill-color: var(--color-text-primary) !important;
+	}
+
+	&:focus {
+		border-color: var(--color-input-border-focus);
+		background-color: var(--color-surface);
+	}
+
+	&::placeholder {
+		color: var(--color-input-placeholder);
+	}
+}
+
+input[type="checkbox"] {
+	width: auto;
+	margin-right: calc(var(--spacing-base) * 0.5);
+}
+
+.input-validation-error {
+	border: 2px solid var(--color-error) !important;
+	background-color: var(--color-error-bg);
+}
+
+.field-validation-error {
+	color: var(--color-error);
+	font-size: 0.875rem;
+	display: block;
+	margin-top: calc(var(--spacing-base) * 0.5);
+}
+
+/* ===================== ログイン画面のリンク調整 ===================== */
+.form-links {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem; /* リンク同士の間隔をしっかり空ける */
+	margin-top: 5rem; /* ボタンとの間隔 */
+	text-align: center; /* リンクを中央寄せにして親指を届きやすく */
+}
+
+.form-links a {
+	display: inline-block;
+	padding: 0.5rem 0; /* タップできる判定エリアを上下に広げる */
+	text-decoration: none; /* 下線を消してスッキリさせたい場合はお好みで */
 }

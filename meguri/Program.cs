@@ -1,14 +1,15 @@
-using System.Net;
+using Meguri.Authorization;
+using Meguri.Data;
+using Meguri.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.HttpOverrides;
-using Meguri.Data;
-using Meguri.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using Microsoft.AspNetCore.Authorization;
-using Meguri.Authorization;
+using System.Net;
 
 namespace Meguri;
 
@@ -61,7 +62,15 @@ public class Program {
             o.SlidingExpiration = true;
         });
 
-        builder.Services.AddControllersWithViews();
+        // ローカライズサービスを登録する（リソースファイルの格納ディレクトリを指定）。
+        builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+        // ビューの多言語対応、データアノテーション（検証エラー等）での共通リソースの使用を設定する。
+        builder.Services.AddControllersWithViews()
+            .AddViewLocalization()                  
+            .AddDataAnnotationsLocalization(options => {
+                options.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(SharedResource));
+            });
 
         builder.Services.AddRazorPages();
 
@@ -80,11 +89,20 @@ public class Program {
 
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
+        //// ミドルウェアを構成して、X-Forwarded-For および X-Forwarded-Proto ヘッダーを転送する。
+        //app.UseForwardedHeaders(new ForwardedHeadersOptions {
+        //    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+        //});
 
-        // ミドルウェアを構成して、X-Forwarded-For および X-Forwarded-Proto ヘッダーを転送する。
-        app.UseForwardedHeaders(new ForwardedHeadersOptions {
+        var forwardedHeadersOptions = new ForwardedHeadersOptions {
             ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-        });
+        };
+
+        // 以下の2行を追加して、プロキシの制限をクリアします
+        forwardedHeadersOptions.KnownNetworks.Clear();
+        forwardedHeadersOptions.KnownProxies.Clear();
+
+        app.UseForwardedHeaders(forwardedHeadersOptions);
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment()) {
@@ -99,10 +117,21 @@ public class Program {
             app.UseHttpsRedirection();
         }
 
+        // サポートする言語を設定する。
+        var supportedCultures = new[] { "ja", "en" };               // 日本語、英語
+        var localizationOptions = new RequestLocalizationOptions()
+            .SetDefaultCulture("ja")                                // デフォルトは日本語
+            .AddSupportedCultures(supportedCultures)
+            .AddSupportedUICultures(supportedCultures);
+
+        // ローカライゼーションを有効化する。
+        app.UseRequestLocalization(localizationOptions);            
+
         app.UseStaticFiles();
 
         app.UseRouting();
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapControllerRoute(

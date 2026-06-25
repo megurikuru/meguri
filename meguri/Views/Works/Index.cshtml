@@ -1,130 +1,86 @@
 @model IEnumerable<Meguri.Models.Work>
-
-@{
-    ViewData["Title"] = "Index";
-}
-
 <h1>Index</h1>
+<p><a asp-action="Create">Create New</a></p>
+@foreach (var item in Model) {
+    <hr>
+    <dl>
+        <div>
+            <dt>@Html.DisplayNameFor(model => model.UserId)</dt>
+            <dd>@Html.DisplayFor(modelItem => item.UserId)</dd>
+        </div>
+        <div>
+            <dt>@Html.DisplayNameFor(model => model.UserName)</dt>
+            <dd>@Html.DisplayFor(modelItem => item.UserName)</dd>
+        </div>
+        <div>
+            <dt>@Html.DisplayNameFor(model => model.Name)</dt>
+            <dd>@Html.DisplayFor(modelItem => item.Name)</dd>
+        </div>
+        <div>
+            <dt>@Html.DisplayNameFor(model => model.Text)</dt>
+            <dd>@Html.DisplayFor(modelItem => item.Text)</dd>
+        </div>
+        <div>
+            <dt>@Html.DisplayNameFor(model => model.ParentId)</dt>
+            <dd>@Html.DisplayFor(modelItem => item.ParentId)</dd>
+        </div>
+        <div>
+            <dt>@Html.DisplayNameFor(model => model.WorkType)</dt>
+            <dd>@Html.DisplayFor(modelItem => item.WorkType)</dd>
+        </div>
+        <div>
+            <dt>@Html.DisplayNameFor(model => model.CategoryId)</dt>
+            <dd>@Html.DisplayFor(modelItem => item.CategoryId)</dd>
+        </div>
+        <div>
+            <dt>@Html.DisplayNameFor(model => model.Category.Name)</dt>
+            <dd>@Html.DisplayFor(modelItem => item.Category.Name)</dd>
+        </div>
+        <div>
+            <dt>@Html.DisplayNameFor(model => model.Tag1)</dt>
+            <dd>@Html.DisplayFor(modelItem => item.Tag1)</dd>
+        </div>
+        <div>
+            <dt>@Html.DisplayNameFor(model => model.Tag2)</dt>
+            <dd>@Html.DisplayFor(modelItem => item.Tag2)</dd>
+        </div>
+        <div>
+            <dt>@Html.DisplayNameFor(model => model.Tag3)</dt>
+        </div>
+            <dd>@Html.DisplayFor(modelItem => item.Tag3)</dd>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Text)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ParentId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WorkType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CategoryId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tag1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tag2)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tag3)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FileContent)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sexual)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Violence)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Created)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Updated)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Text)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ParentId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WorkType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoryId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tag1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tag2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tag3)
-            </td>
-            <td>
-                @{
-                    if (item.FileContent != null) {
-                        var image = Convert.ToBase64String(item.FileContent);
-                        <img src="data:image/png;base64,@image" class="index-work-image">
-                    }
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sexual)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Violence)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Created)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Updated)
-            </td>
-            <td>
+        @{
+            if (item.FileContent != null) {
+                var image = Convert.ToBase64String(item.FileContent);
+                <div>
+                    <dt>@Html.DisplayNameFor(model => model.FileContent)</dt>
+                    <dd><img src="data:image/png;base64,@image"></dd>
+                </div>
+            }
+        }
+        <div>
+            <dt>@Html.DisplayNameFor(model => model.Sexual)</dt>
+            <dd>@Html.DisplayFor(modelItem => item.Sexual)</dd>
+        </div>
+        <div>
+            <dt>@Html.DisplayNameFor(model => model.Violence)</dt>
+            <dd>@Html.DisplayFor(modelItem => item.Violence)</dd>
+        </div>
+        <div>
+            <dt>@Html.DisplayNameFor(model => model.Created)</dt>
+            <dd>@Html.DisplayFor(modelItem => item.Created)</dd>
+        </div>
+        <div>
+            <dt>@Html.DisplayNameFor(model => model.Updated)</dt>
+            <dd>@Html.DisplayFor(modelItem => item.Updated)</dd>
+        </div>
+        <div>
+            <dd>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+            </dd>
+        </div>
+    </dl>
+}
+

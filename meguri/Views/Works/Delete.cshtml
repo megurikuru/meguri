@@ -1,4 +1,4 @@
-﻿@model Meguri.Models.Work
+@model Meguri.Models.Work
 
 @{
     ViewData["Title"] = "Delete";
@@ -10,7 +10,7 @@
 <div>
     <h4>Work</h4>
     <hr />
-    <dl class="row">
+    <dl>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -93,7 +93,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <input type="submit" value="Delete" /> |
         <a asp-action="Index">Back to List</a>
     </form>
 </div>

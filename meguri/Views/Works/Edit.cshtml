@@ -8,89 +8,89 @@
 
 <h4>Work</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div>
+    <div>
         <form asp-action="Edit" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly"></div>
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="UserId" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+            <div>
+                <label asp-for="Name"></label>
+                <input asp-for="Name" />
+                <span asp-validation-for="Name"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Text" class="control-label"></label>
-                <input asp-for="Text" class="form-control" />
-                <span asp-validation-for="Text" class="text-danger"></span>
+            <div>
+                <label asp-for="Text"></label>
+                <input asp-for="Text" />
+                <span asp-validation-for="Text"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ParentId" class="control-label"></label>
-                <input asp-for="ParentId" class="form-control" />
-                <span asp-validation-for="ParentId" class="text-danger"></span>
+            <div>
+                <label asp-for="ParentId"></label>
+                <input asp-for="ParentId" />
+                <span asp-validation-for="ParentId"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="WorkType" class="control-label"></label>
-                <input asp-for="WorkType" class="form-control" />
-                <span asp-validation-for="WorkType" class="text-danger"></span>
+            <div>
+                <label asp-for="WorkType"></label>
+                <input asp-for="WorkType" />
+                <span asp-validation-for="WorkType"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
-                <input asp-for="CategoryId" class="form-control" />
-                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            <div>
+                <label asp-for="CategoryId"></label>
+                <input asp-for="CategoryId" />
+                <span asp-validation-for="CategoryId"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Tag1" class="control-label"></label>
-                <input asp-for="Tag1" class="form-control" />
-                <span asp-validation-for="Tag1" class="text-danger"></span>
+            <div>
+                <label asp-for="Tag1"></label>
+                <input asp-for="Tag1" />
+                <span asp-validation-for="Tag1"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Tag2" class="control-label"></label>
-                <input asp-for="Tag2" class="form-control" />
-                <span asp-validation-for="Tag2" class="text-danger"></span>
+            <div>
+                <label asp-for="Tag2"></label>
+                <input asp-for="Tag2" />
+                <span asp-validation-for="Tag2"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Tag3" class="control-label"></label>
-                <input asp-for="Tag3" class="form-control" />
-                <span asp-validation-for="Tag3" class="text-danger"></span>
+            <div>
+                <label asp-for="Tag3"></label>
+                <input asp-for="Tag3" />
+                <span asp-validation-for="Tag3"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="FileContent" class="control-label"></label>
+            <div>
+                <label asp-for="FileContent"></label>
                 @if (Model.FileContent != null) {
                     <div>
                         @{
                             var image = Convert.ToBase64String(Model.FileContent);
                         }
-                        <img src="data:image/png;base64,@image" class="details-work-image">
+                        <img src="data:image/png;base64,@image">
                     </div>
                 }
-                <input asp-for="FileContent" class="form-control" type="file" />
-                <span asp-validation-for="FileContent" class="text-danger"></span>
+                <input asp-for="FileContent" type="file" />
+                <span asp-validation-for="FileContent"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Sexual" /> @Html.DisplayNameFor(model => model.Sexual)
+            <div>
+                <label>
+                    <input asp-for="Sexual" /> @Html.DisplayNameFor(model => model.Sexual)
                 </label>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Violence" /> @Html.DisplayNameFor(model => model.Violence)
+            <div>
+                <label>
+                    <input asp-for="Violence" /> @Html.DisplayNameFor(model => model.Violence)
                 </label>
             </div>
             @*
-            <div class="form-group">
-                <label asp-for="Created" class="control-label"></label>
-                <input asp-for="Created" class="form-control" />
-                <span asp-validation-for="Created" class="text-danger"></span>
+            <div>
+                <label asp-for="Created"></label>
+                <input asp-for="Created" />
+                <span asp-validation-for="Created"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Updated" class="control-label"></label>
-                <input asp-for="Updated" class="form-control" />
-                <span asp-validation-for="Updated" class="text-danger"></span>
+            <div>
+                <label asp-for="Updated"></label>
+                <input asp-for="Updated" />
+                <span asp-validation-for="Updated"></span>
             </div>
             *@
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div>
+                <input type="submit" value="Save" />
             </div>
         </form>
     </div>
