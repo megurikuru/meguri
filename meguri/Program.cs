@@ -1,7 +1,7 @@
+using Meguri;
 using Meguri.Areas.Identity;
 using Meguri.Authorization;
 using Meguri.Data;
-using Meguri.Resources;
 using Meguri.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -69,14 +69,18 @@ public class Program {
         // ローカライズサービスを登録する（リソースファイルの格納ディレクトリを指定）。
         builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-        // ビューの多言語対応、データアノテーション（検証エラー等）での共通リソースの使用を設定する。
+        // MVC と Razor Pages の両方で多言語対応を有効にする。
         builder.Services.AddControllersWithViews()
             .AddViewLocalization()
             .AddDataAnnotationsLocalization(options => {
                 options.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(SharedResource));
             });
 
-        builder.Services.AddRazorPages();
+        builder.Services.AddRazorPages()
+            .AddViewLocalization()
+            .AddDataAnnotationsLocalization(options => {
+                options.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(SharedResource));
+            });
 
         // 認証されたユーザーを要求する。
         builder.Services.AddAuthorizationBuilder()

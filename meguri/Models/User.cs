@@ -9,7 +9,7 @@ namespace Meguri.Models {
         [Required(ErrorMessage = "RequiredError")]
         [EmailAddress(ErrorMessage = "InvalidEmailError")]
         [Display(Name = "Email")]
-        public string Email { get; set; }
+        public override string? Email { get; set; }
 
         public DateOnly Birthday { get; set; }
         public bool AllowSexual  { get; set; } = false;

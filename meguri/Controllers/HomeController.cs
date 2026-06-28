@@ -1,10 +1,10 @@
+using Meguri;
 using Meguri.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
 using Microsoft.Extensions.Localization;
-using Meguri.Resources;
 
 namespace Meguri.Controllers {
     [AllowAnonymous]
