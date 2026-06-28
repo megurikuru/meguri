@@ -1,6 +1,7 @@
 using Meguri.Areas.Identity;
 using Meguri.Authorization;
 using Meguri.Data;
+using Meguri.Resources;
 using Meguri.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
 using Microsoft.Extensions.Localization;
+using Meguri.Resources;
 
 namespace Meguri.Controllers {
     [AllowAnonymous]
