@@ -120,8 +120,8 @@
   <data name="Categories" xml:space="preserve">
     <value>カテゴリー</value>
   </data>
-  <data name="Confirm Password" xml:space="preserve">
-    <value>パスワード（確認）</value>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
   </data>
   <data name="Create a new account." xml:space="preserve">
     <value>Create a new account.</value>
@@ -141,6 +141,9 @@
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="InvalidEmailError" xml:space="preserve">
+    <value>InvalidEmailError</value>
+  </data>
   <data name="Log in" xml:space="preserve">
     <value>Log in</value>
   </data>
@@ -153,6 +156,27 @@
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="PasswordLengthError" xml:space="preserve">
+    <value>The {0} must be at least {2} and at max {1} characters long."</value>
+  </data>
+  <data name="PasswordMismatchError" xml:space="preserve">
+    <value>The password and confirmation password do not match.</value>
+  </data>
+  <data name="PasswordRequiresDigit" xml:space="preserve">
+    <value>Passwords must have at least one digit ('0'-'9').</value>
+  </data>
+  <data name="PasswordRequiresNonAlphanumeric" xml:space="preserve">
+    <value>PasswordRequiresNonAlphanumeric</value>
+  </data>
+  <data name="PasswordRequiresUniqueChars" xml:space="preserve">
+    <value>Passwords must use at least {0} different characters.</value>
+  </data>
+  <data name="PasswordRequiresUpper" xml:space="preserve">
+    <value>PasswordRequiresUpper</value>
+  </data>
+  <data name="PasswordTooShort" xml:space="preserve">
+    <value>Password must be at least {0} characters long.</value>
+  </data>
   <data name="Privacy" xml:space="preserve">
     <value>Privacy</value>
   </data>
@@ -164,6 +188,9 @@
   </data>
   <data name="Remember me?" xml:space="preserve">
     <value>Remember me?</value>
+  </data>
+  <data name="RequiredError" xml:space="preserve">
+    <value>{0} is required.</value>
   </data>
   <data name="Resend email confirmation" xml:space="preserve">
     <value>Resend email confirmation</value>
@@ -182,9 +209,6 @@
   </data>
   <data name="Tagline3" xml:space="preserve">
     <value>好きが巡る 好きを通じて巡りあうSNS</value>
-  </data>
-  <data name="The {0} field is required." xml:space="preserve">
-    <value>The {0} field is required.</value>
   </data>
   <data name="UploadFiles" xml:space="preserve">
     <value>UploadFiles</value>

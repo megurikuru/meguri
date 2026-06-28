@@ -16,12 +16,12 @@
 		</div>
 		<div>
 			<label asp-for="Input.Password">@L["Password"]</label>
-			<input asp-for="Input.Password" autocomplete="new-password" aria-required="true" placeholder="@L["Password"]" />
+			<input asp-for="Input.Password" value="@Model.Input?.Password" autocomplete="new-password" aria-required="true" placeholder="@L["Password"]" />
 			<span asp-validation-for="Input.Password"></span>
 		</div>
 		<div>
-			<label asp-for="Input.ConfirmPassword">@L["Confirm Password"]</label>
-			<input asp-for="Input.ConfirmPassword" autocomplete="new-password" aria-required="true" placeholder="@L["Confirm Password"]" />
+			<label asp-for="Input.ConfirmPassword">@L["ConfirmPassword"]</label>
+			<input asp-for="Input.ConfirmPassword" value="@Model.Input?.ConfirmPassword" autocomplete="new-password" aria-required="true" placeholder="@L["ConfirmPassword"]" />
 			<span asp-validation-for="Input.ConfirmPassword"></span>
 		</div>
 		<button id="registerSubmit" type="submit">@L["Register"]</button>
@@ -30,6 +30,3 @@
 <div>
 </div>
 
-@section Scripts {
-	<partial name="_ValidationScriptsPartial" />
-}

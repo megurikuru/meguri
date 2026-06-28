@@ -1,3 +1,4 @@
+using Meguri.Areas.Identity;
 using Meguri.Authorization;
 using Meguri.Data;
 using Meguri.Services;
@@ -10,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System.Net;
+using IdConst = Meguri.Constants.IdConst;
 
 namespace Meguri;
 
@@ -35,19 +37,20 @@ public class Program {
         builder.Services.AddDefaultIdentity<IdentityUser>(
             options => options.SignIn.RequireConfirmedAccount = true
         ).AddRoles<IdentityRole>()
-        .AddEntityFrameworkStores<ApplicationDbContext>();
+        .AddEntityFrameworkStores<ApplicationDbContext>()
+        .AddErrorDescriber<LocalizedIdentityErrorDescriber>(); ;
 
         builder.Services.Configure<IdentityOptions>(options => {
             // パスワード強度
             options.Password.RequireDigit = true;
             options.Password.RequireLowercase = true;
-            options.Password.RequireNonAlphanumeric = true;
+            options.Password.RequireNonAlphanumeric = false;
             options.Password.RequireUppercase = true;
-            options.Password.RequiredLength = 12;
-            options.Password.RequiredUniqueChars = 8;
+            options.Password.RequiredLength = IdConst.MinLength;
+            options.Password.RequiredUniqueChars = IdConst.RequiredUniqueChars;
             // ロックアウト
-            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
-            options.Lockout.MaxFailedAccessAttempts = 3;
+            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(IdConst.LockoutMinutes);
+            options.Lockout.MaxFailedAccessAttempts = IdConst.MaxFailedAccessAttempts;
             options.Lockout.AllowedForNewUsers = true;
         });
 
@@ -67,7 +70,7 @@ public class Program {
 
         // ビューの多言語対応、データアノテーション（検証エラー等）での共通リソースの使用を設定する。
         builder.Services.AddControllersWithViews()
-            .AddViewLocalization()                  
+            .AddViewLocalization()
             .AddDataAnnotationsLocalization(options => {
                 options.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(SharedResource));
             });
@@ -125,7 +128,7 @@ public class Program {
             .AddSupportedUICultures(supportedCultures);
 
         // ローカライゼーションを有効化する。
-        app.UseRequestLocalization(localizationOptions);            
+        app.UseRequestLocalization(localizationOptions);
 
         app.UseStaticFiles();
 

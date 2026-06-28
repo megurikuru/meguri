@@ -120,7 +120,7 @@
   <data name="Categories" xml:space="preserve">
     <value>カテゴリー</value>
   </data>
-  <data name="Confirm Password" xml:space="preserve">
+  <data name="ConfirmPassword" xml:space="preserve">
     <value>パスワード（確認）</value>
   </data>
   <data name="Create a new account." xml:space="preserve">
@@ -141,6 +141,9 @@
   <data name="Home" xml:space="preserve">
     <value>ホーム</value>
   </data>
+  <data name="InvalidEmailError" xml:space="preserve">
+    <value>正しいメールアドレスの形式で入力してください。</value>
+  </data>
   <data name="Log in" xml:space="preserve">
     <value>ログイン</value>
   </data>
@@ -153,6 +156,27 @@
   <data name="Password" xml:space="preserve">
     <value>パスワード</value>
   </data>
+  <data name="PasswordLengthError" xml:space="preserve">
+    <value>{0}は{2}文字以上、{1}文字以内で入力してください。</value>
+  </data>
+  <data name="PasswordMismatchError" xml:space="preserve">
+    <value>パスワードと確認用パスワードが一致しません。</value>
+  </data>
+  <data name="PasswordRequiresDigit" xml:space="preserve">
+    <value>パスワードには数字（0〜9）を1文字以上含めてください。</value>
+  </data>
+  <data name="PasswordRequiresNonAlphanumeric" xml:space="preserve">
+    <value>パスワードは英数字以外の文字（記号）を少なくとも1文字含める必要があります。</value>
+  </data>
+  <data name="PasswordRequiresUniqueChars" xml:space="preserve">
+    <value>パスワードには {0} 種類以上の異なる文字を含めてください。</value>
+  </data>
+  <data name="PasswordRequiresUpper" xml:space="preserve">
+    <value>パスワードには大文字を含める必要があります。</value>
+  </data>
+  <data name="PasswordTooShort" xml:space="preserve">
+    <value>パスワードは{0}文字以上で入力してください。</value>
+  </data>
   <data name="Privacy" xml:space="preserve">
     <value>プライバシー</value>
   </data>
@@ -164,6 +188,9 @@
   </data>
   <data name="Remember me?" xml:space="preserve">
     <value>ログイン状態を保持する</value>
+  </data>
+  <data name="RequiredError" xml:space="preserve">
+    <value>{0}は必須項目です。</value>
   </data>
   <data name="Resend email confirmation" xml:space="preserve">
     <value>ユーザー登録確認メール再送</value>
@@ -182,9 +209,6 @@
   </data>
   <data name="Tagline3" xml:space="preserve">
     <value>好きが巡る 好きを通じて巡りあうSNS</value>
-  </data>
-  <data name="The {0} field is required." xml:space="preserve">
-    <value>{0} は必須です。</value>
   </data>
   <data name="UploadFiles" xml:space="preserve">
     <value>アップロードファイル</value>
