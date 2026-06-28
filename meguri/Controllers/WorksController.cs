@@ -68,9 +68,9 @@ namespace Meguri.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            int id, string name, string? text, int parentId, string workType,
-            int categoryId, string? tag1, string? tag2, string? tag3,
-            IFormFile? fileContent, bool sexual, bool violence,
+            int id, string name, string text, int parentId, string workType,
+            int categoryId, string tag1, string tag2, string tag3,
+            IFormFile fileContent, bool sexual, bool violence,
             DateTime created, DateTime updated
         ) {
             Work work = new Work();
@@ -145,13 +145,13 @@ namespace Meguri.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(
-            int id, string name, string? text, int parentId, string workType,
-            int categoryId, string? tag1, string? tag2, string? tag3,
-            IFormFile? fileContent, bool sexual, bool violence, 
+            int id, string name, string text, int parentId, string workType,
+            int categoryId, string tag1, string tag2, string tag3,
+            IFormFile fileContent, bool sexual, bool violence, 
             DateTime created, DateTime updated,
             string userId
         ) {
-            Work? work = _context.Work.Find(id);
+            Work work = _context.Work.Find(id);
             if (work == null) {
                 return NotFound();
             }

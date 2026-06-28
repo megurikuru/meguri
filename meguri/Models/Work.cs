@@ -14,17 +14,17 @@ namespace Meguri.Models {
     [Index(nameof(Updated))]
     public class Work {
         public int Id { get; set; }
-        public string? UserId { get; set; }
-        public string? UserName { get; set; }
-        public string? Name { get; set; }
-        public string? Text { get; set; }
+        public string UserId { get; set; }
+        public string UserName { get; set; }
+        public string Name { get; set; }
+        public string Text { get; set; }
         public int ParentId { get; set; }
-        public string? WorkType { get; set; }
+        public string WorkType { get; set; }
         public int CategoryId { get; set; }
-        public string? Tag1 { get; set; }
-        public string? Tag2 { get; set; }
-        public string? Tag3 { get; set; }
-        public byte[]? FileContent { get; set; }
+        public string Tag1 { get; set; }
+        public string Tag2 { get; set; }
+        public string Tag3 { get; set; }
+        public byte[] FileContent { get; set; }
         public bool Sexual  { get; set; } = false;
         public bool Violence  { get; set; } = false;
         public DateTime Created { get; set; }
@@ -32,7 +32,7 @@ namespace Meguri.Models {
 
         // ナビゲーションプロパティ
         // 1対1のリレーション
-        public Category? Category { get; set; }
+        public Category Category { get; set; }
     }
 
 }

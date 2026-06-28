@@ -10,7 +10,7 @@ namespace Meguri.Models {
         [Required]
         public string Name { get; set; } = string.Empty;
 
-        public ICollection<Work>? Works { get; set; }
+        public ICollection<Work> Works { get; set; }
     }
 
 }

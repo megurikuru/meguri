@@ -43,14 +43,14 @@ namespace Meguri.Areas.Identity {
             };
         }
 
-        public override IdentityError InvalidUserName(string? userName) {
+        public override IdentityError InvalidUserName(string userName) {
             return new IdentityError {
                 Code = nameof(InvalidUserName),
                 Description = string.Format(_localizer["InvalidUserName"], userName)
             };
         }
 
-        public override IdentityError InvalidEmail(string? email) {
+        public override IdentityError InvalidEmail(string email) {
             return new IdentityError {
                 Code = nameof(InvalidEmail),
                 Description = string.Format(_localizer["InvalidEmail"], email)
@@ -71,7 +71,7 @@ namespace Meguri.Areas.Identity {
             };
         }
 
-        public override IdentityError InvalidRoleName(string? roleName) {
+        public override IdentityError InvalidRoleName(string roleName) {
             return new IdentityError {
                 Code = nameof(InvalidRoleName),
                 Description = string.Format(_localizer["InvalidRoleName"], roleName)

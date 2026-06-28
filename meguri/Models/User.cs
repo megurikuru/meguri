@@ -9,12 +9,12 @@ namespace Meguri.Models {
         [Required(ErrorMessage = "RequiredError")]
         [EmailAddress(ErrorMessage = "InvalidEmailError")]
         [Display(Name = "Email")]
-        public override string? Email { get; set; }
+        public override string Email { get; set; }
 
         public DateOnly Birthday { get; set; }
         public bool AllowSexual  { get; set; } = false;
         public bool AllowViolence  { get; set; } = false;
 
-        public ICollection<Work>? Works { get; set; }
+        public ICollection<Work> Works { get; set; }
     }
 }
