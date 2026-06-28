@@ -1,12 +1,12 @@
 using MailKit.Net.Smtp;
 using MailKit.Security;
-using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using MimeKit;
 
 namespace Meguri.Services;
 
-public class EmailSender : IEmailSender {
+public class EmailSender : IEmailSender<IdentityUser> {
     private readonly ILogger _logger;
 
     public EmailSender(
@@ -18,10 +18,17 @@ public class EmailSender : IEmailSender {
 
     public SMTPServerConf Options { get; }
 
-    public async Task SendEmailAsync(
-        string toEmail, string subject, string message
-    ) {
-        await Execute(subject, message, toEmail);
+    // .NET 8 新インターフェースの実装
+    public async Task SendConfirmationLinkAsync(IdentityUser user, string email, string confirmationLink) {
+        await Execute("アカウントの確認", $"以下のリンクをクリックしてアカウントを確定してください。<br><a href='{confirmationLink}'>ココをクリック</a>", email);
+    }
+
+    public async Task SendPasswordResetLinkAsync(IdentityUser user, string email, string resetLink) {
+        await Execute("パスワードのリセット", $"以下のリンクをクリックしてパスワードをリセットしてください。<br><a href='{resetLink}'>ココをクリック</a>", email);
+    }
+
+    public async Task SendPasswordResetCodeAsync(IdentityUser user, string email, string resetCode) {
+        await Execute("パスワードリセットコード", $"リセットコードは次の通りです: {resetCode}", email);
     }
 
     public async Task Execute(string subject, string message, string toEmail) {

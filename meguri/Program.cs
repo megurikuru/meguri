@@ -38,7 +38,7 @@ public class Program {
             options => options.SignIn.RequireConfirmedAccount = true
         ).AddRoles<IdentityRole>()
         .AddEntityFrameworkStores<ApplicationDbContext>()
-        .AddErrorDescriber<LocalizedIdentityErrorDescriber>(); ;
+        .AddErrorDescriber<LocalizedIdentityErrorDescriber>();
 
         builder.Services.Configure<IdentityOptions>(options => {
             // パスワード強度
@@ -56,7 +56,7 @@ public class Program {
 
         // メール
         var smtpServerConf = builder.Configuration.GetSection("SMTPServerConf");
-        builder.Services.AddTransient<IEmailSender, EmailSender>();
+        builder.Services.AddTransient<Microsoft.AspNetCore.Identity.IEmailSender<IdentityUser>, EmailSender>();
         builder.Services.Configure<SMTPServerConf>(smtpServerConf);
 
         // クッキー
