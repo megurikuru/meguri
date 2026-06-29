@@ -27,10 +27,10 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Resources/SharedResource.en.resx">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources/SharedResource.ja.resx">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources/Meguri.Areas.Identity.LocalizedIdentityErrorDescriber.en.resx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
