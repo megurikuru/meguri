@@ -1,0 +1,39 @@
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@using Meguri
+@inject IHtmlLocalizer<SharedResource> L
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>@ViewData["Title"]</title>
+  <link rel="stylesheet" href="~/css/meguri.css" asp-append-version="true" />
+</head>
+<body>
+  <header>
+    <a asp-area="" asp-controller="Home" asp-action="Index">@L["ServiceName"]<span class="tagline">@L["Tagline"]</span></a>
+  </header>
+  @if (SignInManager.IsSignedIn(User)) {
+    <nav>
+      <a asp-area="" asp-controller="Home" asp-action="Index">@L["Home"]</a>
+      <a asp-area="" asp-controller="Works" asp-action="Index">@L["Works"]</a>
+      <a asp-area="" asp-controller="UploadFiles" asp-action="Index">@L["UploadFiles"]</a>
+      <a asp-area="" asp-controller="Categories" asp-action="Index">@L["Categories"]</a>
+    </nav>
+  }
+  <main>
+    @RenderBody()
+  </main>
+  <footer>
+    &copy; 2024 - @L["ServiceName"] - <a asp-area="" asp-controller="Home" asp-action="Privacy">@L["Privacy"]</a>
+  </footer>
+  <script src="~/js/meguri.js" asp-append-version="true"></script>
+  @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Meguri</RootNamespace>
+    <AssemblyName>Meguri</AssemblyName>
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-meguri-af33aab4-b7dc-403c-9e12-951d0b576451</UserSecretsId>

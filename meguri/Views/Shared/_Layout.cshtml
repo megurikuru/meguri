@@ -1,11 +1,27 @@
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
 
 @using Meguri
 @inject IHtmlLocalizer<SharedResource> L
+@inject IStringLocalizerFactory LocalizerFactory
 
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+
+@{
+    // デバッグ用：SharedResource が内部で探しているリソースの「ベース名」を取得する
+    var localizer = LocalizerFactory.Create(typeof(SharedResource));
+    
+    // リフレクションを使って、内部の ResourceManager が想定しているリソースの場所（名前空間＋ファイル名）を強引に引っこ抜く
+    var resourceManagerField = localizer.GetType().GetField("_resourceManager", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+    var resourceManager = resourceManagerField?.GetValue(localizer) as System.Resources.ResourceManager;
+    var baseName = resourceManager?.BaseName ?? "取得失敗（Localizerの型が想定と異なります）";
+
+    // アセンブリの物理パス（実行されている場所）を取得
+    var assemblyPath = typeof(SharedResource).Assembly.Location;
+    var assemblyDir = System.IO.Path.GetDirectoryName(assemblyPath);
+}
 
 <!DOCTYPE html>
 <html lang="jp">
@@ -16,6 +32,16 @@
   <link rel="stylesheet" href="~/css/meguri.css" asp-append-version="true" />
 </head>
 <body>
+
+  <div style="background: #fff3cd; color: #856404; border: 1px solid #ffeeba; padding: 15px; margin: 10px; font-family: monospace; font-size: 13px; line-height: 1.5; z-index: 9999; position: relative;">
+      <strong>【ローカライズ パスデバッグ情報】</strong><br />
+      ・.NETが探しているリソース構造 (BaseName): <span style="color: #c0392b; font-weight: bold;">@baseName</span><br />
+      ・実行中のアセンブリ配置フォルダ: <span style="color: #2980b9;">@assemblyDir</span><br />
+      <small style="color: #666; display: block; margin-top: 5px;">
+          ※ Linux上で動かす場合、ディスク上の実際のフォルダ階層・大文字小文字が上記 <strong>BaseName</strong>（の `Resources.` 以降）と完全に一致している必要があります。
+      </small>
+  </div>
+
   <header>
     <a asp-area="" asp-controller="Home" asp-action="Index">@L["ServiceName"]<span class="tagline">@L["Tagline"]</span></a>
   </header>
