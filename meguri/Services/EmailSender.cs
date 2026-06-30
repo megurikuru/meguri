@@ -34,7 +34,7 @@ public class EmailSender : IEmailSender<IdentityUser> {
     public async Task Execute(string subject, string message, string toEmail) {
         var mimeMessage = new MimeMessage();
         mimeMessage.From.Add(new MailboxAddress(
-            Options.Accout, Options.Accout)
+            Options.Account, Options.Account)
         );
         mimeMessage.To.Add(new MailboxAddress(toEmail, toEmail));
         mimeMessage.Subject = subject;
@@ -48,7 +48,7 @@ public class EmailSender : IEmailSender<IdentityUser> {
                     Options.HostName, Options.Port, SecureSocketOptions.Auto
                 );
                 await client.AuthenticateAsync(
-                    Options.Accout, Options.Password
+                    Options.Account, Options.Password
                 );
                 await client.SendAsync(mimeMessage);
                 await client.DisconnectAsync(true);
