@@ -55,9 +55,10 @@ public class EmailSender : IEmailSender<IdentityUser>, Microsoft.AspNetCore.Iden
                     Options.HostName, Options.Port, SecureSocketOptions.SslOnConnect
                 );
 
-                // 利用する認証方式をCRAM-MD5にする。
+                // 認証方式を PLAIN または LOGIN にする。
                 client.AuthenticationMechanisms.Clear();
-                client.AuthenticationMechanisms.Add("CRAM-MD5");
+                client.AuthenticationMechanisms.Add("PLAIN");
+                client.AuthenticationMechanisms.Add("LOGIN");
 
                 await client.AuthenticateAsync(
                     Options.Account, Options.Password
