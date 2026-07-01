@@ -6,7 +6,9 @@ using MimeKit;
 
 namespace Meguri.Services;
 
-public class EmailSender : IEmailSender<IdentityUser> {
+// 2つのインターフェースを両方実装する
+public class EmailSender : IEmailSender<IdentityUser>, Microsoft.AspNetCore.Identity.UI.Services.IEmailSender {
+    
     private readonly ILogger _logger;
 
     public EmailSender(
@@ -17,6 +19,11 @@ public class EmailSender : IEmailSender<IdentityUser> {
     }
 
     public SMTPServerConf Options { get; }
+
+    // 古いインターフェース用のメソッド
+    public async Task SendEmailAsync(string email, string subject, string htmlMessage) {
+        await Execute(subject, htmlMessage, email);
+    }
 
     // .NET 8 新インターフェースの実装
     public async Task SendConfirmationLinkAsync(IdentityUser user, string email, string confirmationLink) {

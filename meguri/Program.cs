@@ -57,7 +57,8 @@ public class Program {
 
         // メール
         var smtpServerConf = builder.Configuration.GetSection("SMTPServerConf");
-        builder.Services.AddTransient<Microsoft.AspNetCore.Identity.IEmailSender<IdentityUser>, EmailSender>();
+        builder.Services.AddTransient<Microsoft.AspNetCore.Identity.IEmailSender<IdentityUser>, EmailSender>(); // IdentityUser 用の IEmailSender
+        builder.Services.AddTransient<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, EmailSender>();   // UI 用の IEmailSender の両方を登録する。
         builder.Services.Configure<SMTPServerConf>(smtpServerConf);
 
         // クッキー
