@@ -8,7 +8,7 @@ namespace Meguri.Services;
 
 // 2つのインターフェースを両方実装する
 public class EmailSender : IEmailSender<IdentityUser>, Microsoft.AspNetCore.Identity.UI.Services.IEmailSender {
-    
+
     private readonly ILogger _logger;
 
     public EmailSender(
@@ -52,8 +52,13 @@ public class EmailSender : IEmailSender<IdentityUser>, Microsoft.AspNetCore.Iden
             using (var client = new SmtpClient()) {
                 client.LocalDomain = Options.LocalDomain;
                 await client.ConnectAsync(
-                    Options.HostName, Options.Port, SecureSocketOptions.Auto
+                    Options.HostName, Options.Port, SecureSocketOptions.SslOnConnect
                 );
+
+                // 利用する認証方式をCRAM-MD5にする。
+                client.AuthenticationMechanisms.Clear();
+                client.AuthenticationMechanisms.Add("CRAM-MD5");
+
                 await client.AuthenticateAsync(
                     Options.Account, Options.Password
                 );
@@ -61,7 +66,7 @@ public class EmailSender : IEmailSender<IdentityUser>, Microsoft.AspNetCore.Iden
                 await client.DisconnectAsync(true);
             }
         } catch (Exception ex) {
-            _logger.LogInformation(
+            _logger.LogError(
                 "Failure Email to {ToEmail}. {ExMessage}", toEmail, ex.Message
             );
             return;
